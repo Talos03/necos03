@@ -1,0 +1,312 @@
+!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <title>Pass-Generator - Support</title>
+</head>
+
+<body>
+    <header>
+        <h1>El generador de contraseñas</h1>
+    </header>
+    <main>
+        <div class="mainContainer">
+            <div class="contenedor">
+                <div class="selector">
+                    <button type="button" id="Q6000" onclick="showQ6000()">Q6000</button>
+                    <button type="button" id="DX8000" onclick="showDX8000()">DX8000</button>
+                    <button type="button" id="DX8000" onclick="showDX8000Sab()">DX8000 - Sabadell</button>
+                </div>
+                <div id="Q6000Section">
+                    <h3>Ingresa el número de serie del Q6000</h3>
+                    <input id="serie" type="number" required>
+                    <button id="boton" type="button" onclick="calcularContraseña()">Calcular</button>
+                </div>
+                <div id="DX8000Section" class="noActive">
+                    <h3>Ingresa el número de serie del DX8000</h3>
+                    <input id="serieDX" type="text" required>
+                    <button id="botonDX" type="button" onclick="calcularContraseñaDX()">Calcular</button>
+                </div>
+                <div id="DX8000SabSection" class="noActive">
+                    <h3>Ingresa el número de serie del DX8000 - Sabadell</h3>
+                    <input id="serieDXSab" type="text" required>
+                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Calcular</button>
+                </div>
+                <div id="contenedorPass"></div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <footer class="footer">
+        <h4 id="copyright"></h4>
+    </footer>
+</body>
+
+</html>
+
+<!-- El estilo de la web -->
+<style>
+    :root {
+        font-family: sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #FFA500, #FF6347);
+        /* Degradado de fondo en tonos de naranja */
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h3 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .mainContainer {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .selector {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .selector>button {
+        flex-grow: 1;
+    }
+
+    .noActive {
+        display: none;
+    }
+
+    .contenedor {
+        background-color: rgba(255, 165, 0, 0.5);
+        /* Fondo en tono naranja */
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+        border-radius: 1rem;
+        width: 20rem;
+        /* Botón más grande */
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 2rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 2rem;
+    }
+
+    button {
+        background: linear-gradient(135deg, #FF6347, #FF4500);
+        /* Degradado de fondo para el botón en tonos de naranja */
+        color: #FFF;
+        /* Texto en blanco */
+        font-size: 1rem;
+        border: none;
+        padding: 1rem 1rem;
+        /* Aumentar el tamaño del botón */
+        border-radius: 0.5rem;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        /* Sombra para dar efecto de presión */
+        cursor: pointer;
+        transition: background 0.3s, transform 0.1s;
+    }
+
+    button:hover {
+        background: linear-gradient(135deg, #FF4500, #FF6347);
+        /* Cambio de color en hover */
+        transform: scale(1.05);
+        /* Efecto de agrandamiento en hover */
+    }
+
+    hr {
+        color: black;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        font-size: small;
+        margin-top: 2rem;
+        background-color: rgb(242, 242, 242);
+        width: 100vw;
+        padding: 1rem;
+    }
+</style>
+
+<!-- El codigo que calcula el password -->
+<script defer>
+    function calcularContraseña() {
+        let serial = document.getElementById('serie').value;
+        if (serial !== '') {
+            let contraseña;
+            let contenedorPass = document.getElementById('contenedorPass');
+            let h4serie = document.createElement('h4');
+            let h4pass = document.createElement('h4');
+            let hrLn = document.createElement('hr');
+
+            //Slice corta contando desde el 0 el valor entre los dos numeros
+            contraseña = serial.slice(7, 8) + serial.slice(2, 3) + serial.slice(5, 6) + serial.slice(3, 4) + serial.slice(6, 7) + serial.slice(8, 9);
+
+            h4serie.textContent = `Serie: ${serial}`;
+            h4pass.textContent = `Contraseña: ${contraseña}`;
+
+            //Prepend hace que siempre se agregue arriba de todo
+            contenedorPass.prepend(h4pass);
+            contenedorPass.prepend(h4serie);
+            contenedorPass.prepend(hrLn);
+        }
+    }
+
+    /* Probablemente esto se pueda refactorizar pero no tengo muchas ganas */
+    function showQ6000() {
+        document.getElementById('Q6000Section').style.display = 'grid';
+        document.getElementById('DX8000Section').style.display = 'none';
+        document.getElementById('DX8000SabSection').style.display = 'none';
+        let contendorResult = document.getElementById('contenedorPass');
+
+        /* Mientras exista un hijo dentro del div borra todo */
+        while (contendorResult.firstChild) {
+            contendorResult.removeChild(contendorResult.firstChild);
+        }
+    }
+
+    function showDX8000() {
+        document.getElementById('DX8000Section').style.display = 'grid';
+        document.getElementById('Q6000Section').style.display = 'none';
+        document.getElementById('DX8000SabSection').style.display = 'none';
+        let contendorResult = document.getElementById('contenedorPass');
+
+        /* Mientras exista un hijo dentro del div borra todo */
+        while (contendorResult.firstChild) {
+            contendorResult.removeChild(contendorResult.firstChild);
+        }
+    }
+
+    function showDX8000Sab() {
+        document.getElementById('DX8000Section').style.display = 'none';
+        document.getElementById('Q6000Section').style.display = 'none';
+        document.getElementById('DX8000SabSection').style.display = 'grid';
+        let contendorResult = document.getElementById('contenedorPass');
+
+        /* Mientras exista un hijo dentro del div borra todo */
+        while (contendorResult.firstChild) {
+            contendorResult.removeChild(contendorResult.firstChild);
+        }
+    }
+
+
+    function calcularContraseñaDX() {
+        let serial = document.getElementById('serieDX').value;
+        if (serial !== '') {
+            let contraseña;
+            let contenedorPass = document.getElementById('contenedorPass');
+            let h4serie = document.createElement('h4');
+            let h4pass = document.createElement('h4');
+            let hrLn = document.createElement('hr');
+            /* Tomar los antepenultimos dos digitos y darlos vuelta */
+            let antesDeUltimos2 = serial.slice(-4, -2).split('').reverse().join('');
+            /* Tomo los dos primeros, separo, los doy vuelta y los vuelvo a unir */
+            let iniciales2 = serial.slice(0, 2).split('').reverse().join('');
+            /* Tomo los ultimos dos digitos y los separo, doy vuelta y vuelvo a unir */
+            let finales2 = serial.slice(-2).split('').reverse().join('');
+            /* Uno todo en la contraseña final */
+
+            contraseña = antesDeUltimos2 + iniciales2 + finales2;
+
+            h4serie.textContent = `Serie: ${serial}`;
+            h4pass.textContent = `Contraseña: ${contraseña}`;
+            //Prepend hace que siempre se agregue arriba de todo
+            contenedorPass.prepend(h4pass);
+            contenedorPass.prepend(h4serie);
+            contenedorPass.prepend(hrLn);
+        }
+    }
+
+    function calcularContraseñaDXSab() {
+        /* 8 digit password: 03ab21xy 
+        where, -abcd = 4 last n/s digits, 
+        in case there are any letter then replace them by 0
+        -xy = (b+(c*d)), pad left side with 0 to get 2 digits if necessary */
+        let serial = document.getElementById('serieDXSab').value;
+        if (serial !== '') {
+            let contraseña = [0, 3, 'a', 'b', 2, 1, 'x', 'y'];
+            let contenedorPass = document.getElementById('contenedorPass');
+            let h4serie = document.createElement('h4');
+            let h4pass = document.createElement('h4');
+            let hrLn = document.createElement('hr');
+
+            /* Tomar los digitos abcd */
+            let ultimos4 = serial.slice(-4).split('');
+            contraseña[2] = ultimos4[0];
+            contraseña[3] = ultimos4[1];
+            
+            let xy = ultimos4[1] + (ultimos4[2] * ultimos4[3]);
+            if (xy < 10) {
+                xy = '0' + xy; // Agregar un 0 delante si xy es menor que 10
+            }
+            xy = xy.toString().slice(-2); // Tomar solo los dos últimos dígitos (en caso de que sea mayor a 99)
+
+            contraseña[6] = xy[0];
+            contraseña[7] = xy[1];
+
+            h4serie.textContent = `Serie: ${serial}`;
+            h4pass.textContent = `Contraseña: ${contraseña.join('')}`;
+            //Prepend hace que siempre se agregue arriba de todo
+            contenedorPass.prepend(h4pass);
+            contenedorPass.prepend(h4serie);
+            contenedorPass.prepend(hrLn);
+        }
+    }
+    //Muestra de forma predeterminada el Q6000
+    showQ6000();
+
+    //Esto cambia la fecha del copyright a la del año actual
+    const fecha = new Date();
+    const añoActual = fecha.getFullYear();
+    const h4Footer = document.getElementById("copyright").textContent = "©️ Copyright Kaled Emanuel Jaluf" + " " + añoActual;
+</script>
