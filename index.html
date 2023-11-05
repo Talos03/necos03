@@ -37,131 +37,69 @@
 
 <!-- El estilo de la web -->
 <style>
-    :root {
-        font-family: sans-serif;
-    }
+   :root {
+    font-family: Arial, sans-serif; /* Cambio de la fuente por una más común */
+}
 
-    body {
-        background: linear-gradient(135deg, #FFA500, #FF6347);
-        /* Degradado de fondo en tonos de naranja */
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-    }
+body {
+    background: #002366; /* Cambio a un tono azul oscuro característico */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #FFF; /* Texto en blanco para destacar en el fondo oscuro */
+}
 
-    h1 {
-        text-align: center;
-    }
+/* Cambios en los encabezados para un contraste apropiado */
+h1, h3, h4 {
+    text-align: center;
+    color: #002366;
+}
 
-    main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        gap: 1rem;
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    }
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: #E6E6E6; /* Fondo gris claro para el contenido */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-    h3 {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
+/* Se ajustan los estilos para el contenedor principal */
+.mainContainer, .selector, .contenedor {
+    background-color: #FFF; /* Fondos blancos para los contenedores */
+}
 
-    .mainContainer {
-        display: flex;
-        gap: 2rem;
-    }
+/* Estilos para los botones y campos de entrada */
+input, button {
+    background: #002366; /* Fondo azul oscuro */
+    color: #FFF; /* Texto en blanco */
+    border: none;
+}
 
-    .selector {
-        display: flex;
-        justify-content: space-between;
-        gap: 0.5rem;
-    }
+button {
+    padding: 1rem 2rem; /* Ajuste en el relleno del botón */
+    border-radius: 0.5rem;
+}
 
-    .selector>button {
-        flex-grow: 1;
-    }
+button:hover {
+    background: #003399; /* Cambio de tono al pasar el cursor por encima */
+    transform: scale(1.05);
+}
 
-    .noActive {
-        display: none;
-    }
+/* Se conserva el estilo del pie de página */
+footer {
+    display: flex;
+    justify-content: center;
+    font-size: small;
+    margin-top: 2rem;
+    background-color: #E6E6E6;
+    width: 100vw;
+    padding: 1rem;
+}
 
-    .contenedor {
-        background-color: rgba(255, 165, 0, 0.5);
-        /* Fondo en tono naranja */
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem;
-        gap: 1rem;
-        border-radius: 1rem;
-        width: 20rem;
-        /* Botón más grande */
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    h4 {
-        text-align: center;
-    }
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    input {
-        width: 100%;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 2rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        border: none;
-        border-radius: 5px;
-        font-size: 2rem;
-    }
-
-    button {
-        background: linear-gradient(135deg, #FF6347, #FF4500);
-        /* Degradado de fondo para el botón en tonos de naranja */
-        color: #FFF;
-        /* Texto en blanco */
-        font-size: 1rem;
-        border: none;
-        padding: 1rem 1rem;
-        /* Aumentar el tamaño del botón */
-        border-radius: 0.5rem;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-        /* Sombra para dar efecto de presión */
-        cursor: pointer;
-        transition: background 0.3s, transform 0.1s;
-    }
-
-    button:hover {
-        background: linear-gradient(135deg, #FF4500, #FF6347);
-        /* Cambio de color en hover */
-        transform: scale(1.05);
-        /* Efecto de agrandamiento en hover */
-    }
-
-    hr {
-        color: black;
-    }
-
-    footer {
-        display: flex;
-        justify-content: center;
-        font-size: small;
-        margin-top: 2rem;
-        background-color: rgb(242, 242, 242);
-        width: 100vw;
-        padding: 1rem;
-    }
 </style>
 
 <!-- El codigo que calcula el password -->
