@@ -1,5 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
+
+<head>
+    <!-- ... (código del head) ... -->
+</head>
+
+<body>
+    <header>
+        <h1>El generador de contraseñas</h1>
+    </header>
+    <main>
+        <div class="mainContainer">
+            <div class="contenedor">
+                <div class="selector">
+                    <button type="button" id="DX8000Sabadell" onclick="showDX8000Sab()">DX8000<img
+                            src="./images/bSabadell.svg" alt="BancoSabadell"></button>
+                </div>
+                <div id="DX8000SabSection">
+                    <h3>Ingresa el número de serie del DX8000</h3>
+                    <input id="serieDXSab" type="text" required>
+                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Calcular</button>
+                </div>
+                <div id="contenedorPass"><img src="./images/RANG.gif" class="RICK"></div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <h4 id="copyright"></h4>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
     
 </head>
     <meta charset="UTF-8">
@@ -7,33 +39,6 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <title>Pass-Generator - Support</title>
 </head>
-
-<body>
-   <header>
-       <h1>DX Password</h1>
-    </header>
-    <main>
-        <div class="mainContainer">
-            <div class="contenedor">
-                <div class="selector">
-                    <button type="button" id="DX8000" onclick="showDX8000Sab()">DX8000 - Sabadell</button>
-                </div>
-                <div id="DX8000SabSection" class="noActive">
-                    <h3>Ingresa el número de serie del DX8000 - Sabadell</h3>
-                    <input id="serieDXSab" type="text" required>
-                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Generar</button>
-                </div>
-                <div id="contenedorPass"></div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <h4 id="copyright"></h4>
-    </footer>
-</body>
-
-</html>
 
 <!-- El estilo de la web -->
 <style>
