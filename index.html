@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
-    
-</head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -9,22 +9,21 @@
 </head>
 
 <body>
-   <header>
-       <h1>DX Password</h1>
+    <header>
+        <h1>Password DX</h1>
     </header>
     <main>
         <div class="mainContainer">
             <div class="contenedor">
-                 <div id="DX8000SabSection" class="noActive">
-                    <h3>Ingresa el número de serie del DX8000 - Sabadell</h3>
+                <div id="DX8000" class="noActive">
+                    <h3>Ingresa los cuatro últimos dígitos del número de serie</h3>
                     <input id="serieDXSab" type="text" required>
-                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Calcular</button>
+                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Generar</button>
                 </div>
-                <div id="contenedorPass"></div>
+                <div id="contenedorPass"><img src="./images/RANG.gif" class="RICK"></div>
             </div>
         </div>
     </main>
-
     <footer class="footer">
         <h4 id="copyright"></h4>
     </footer>
@@ -34,70 +33,149 @@
 
 <!-- El estilo de la web -->
 <style>
-   :root {
-    font-family: Arial, sans-serif; /* Cambio de la fuente por una más común */
-}
+    :root {
+        font-family: sans-serif;
 
-body {
-    background: #088cd8; /* Cambio a un tono azul oscuro característico */
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    color: #FFF; /* Texto en blanco para destacar en el fondo oscuro */
-}
-
-/* Cambios en los encabezados para un contraste apropiado */
-h1, h3, h4 {
-    text-align: center;
-    color: #088cd8;
-}
-
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 1rem;
-    background-color: #E6E6E6; /* Fondo gris claro para el contenido */
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Se ajustan los estilos para el contenedor principal */
-.mainContainer, .selector, .contenedor {
-    background-color: #FFF; /* Fondos blancos para los contenedores */
-}
-
-/* Estilos para los botones y campos de entrada */
-input, button {
-    background: #088cd8; /* Fondo azul oscuro */
-    color: #FFF; /* Texto en blanco */
-    border: none;
-}
-
-button {
-    padding: 1rem 2rem; /* Ajuste en el relleno del botón */
-    border-radius: 0.5rem;
-}
-
-button:hover {
-    background: #0d40a5; /* Cambio de tono al pasar el cursor por encima */
-    transform: scale(1.05);
-}
-
-/* Se conserva el estilo del pie de página */
-footer {
-    display: flex;
-    justify-content: center;
-    font-size: small;
-    margin-top: 2rem;
-    background-color: #a7a5a5;
-    width: 100vw;
-    padding: 1rem;
-}
+        
+        --blue-main-bg: linear-gradient(135deg, #0079ad, #045483);
+        /* Degradado de fondo en tonos de azul */
+        --blue-main-bg-opacity: rgba(255, 255, 255, 0.8);
+        /* Nuevo fondo con tono azul */
+        --blue-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        --blue-bg: rgba(0, 81, 173, 0.5);
+        /* Nuevo fondo en tono azul */
+        --blue-button-bg: linear-gradient(135deg, #004e7a, #002f4b);
+        /* Nuevo degradado de fondo en tonos de azul */
+        --blue-button-text-color: #FFF;
+        /* Texto en blanco */
+        --blue-button-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        /* Sombra para dar efecto de presión */
+        --blue-button-hover-bg: linear-gradient(135deg, #002f4b, #004e7a);
+        /* Cambio de color en hover */
 
 
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: var(--main-bg-opacity);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: var(--box-shadow);
+    }
+
+    h3 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    button>img {
+        max-width: 3rem;
+        border-radius: 5px;
+    }
+
+    .selector {
+        display: grid;
+        justify-content: space-between;
+        gap: 0.5rem;
+        grid-auto-flow: column;
+    }
+
+    .noActive {
+        display: none;
+    }
+
+    .contenedor {
+        background-color: var(--orange-bg);
+        /* Fondo en tono naranja */
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+        border-radius: 1rem;
+        /* Botón más grande */
+        box-shadow: var(--box-shadow);
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 2rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 2rem;
+    }
+
+    button {
+        background: var(--button-bg);
+        color: var(--button-text-color);
+        box-shadow: var(--button-shadow);
+        font-size: 1rem;
+        border: none;
+        padding: 1rem 1rem;
+        /* Aumentar el tamaño del botón */
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.1s;
+    }
+
+    button:hover {
+        background: var(--button-hover-bg);
+        /* Cambio de color en hover */
+        transform: scale(1.05);
+        /* Efecto de agrandamiento en hover */
+    }
+
+    hr {
+        color: black;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        font-size: small;
+        margin-top: 2rem;
+        background-color: rgb(242, 242, 242);
+        width: 100vw;
+        padding: 1rem;
+    }
+
+    .RICK {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        border-radius: 99%;
+        width: 6rem;
+    }
 </style>
 
 <!-- El codigo que calcula el password -->
