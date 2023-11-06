@@ -10,31 +10,13 @@
 
 <body>
     <header>
-        <h1>El generador de contraseñas</h1>
+        <h1>Pass Generator</h1>
     </header>
     <main>
         <div class="mainContainer">
             <div class="contenedor">
-                <div class="selector">
-                    <button type="button" id="Q6000" onclick="showQ6000()">Q6000 <img src="./images/CGP2.png"
-                            alt=""></button>
-                    <button type="button" id="DX8000" onclick="showDX8000()">DX8000 <img src="./images/CGP2.png"
-                            alt=""></button>
-                    <button type="button" id="DX8000Sabadell" onclick="showDX8000Sab()">DX8000<img
-                            src="./images/bSabadell.svg" alt="BancoSabadell"></button>
-                </div>
-                <div id="Q6000Section">
-                    <h3>Ingresa el número de serie del Q6000</h3>
-                    <input id="serie" type="number" required>
-                    <button id="boton" type="button" onclick="calcularContraseña()">Calcular</button>
-                </div>
-                <div id="DX8000Section" class="noActive">
-                    <h3>Ingresa el número de serie del DX8000</h3>
-                    <input id="serieDX" type="text" required>
-                    <button id="botonDX" type="button" onclick="calcularContraseñaDX()">Calcular</button>
-                </div>
                 <div id="DX8000SabSection" class="noActive">
-                    <h3>Ingresa el número de serie del DX8000</h3>
+                    <h3>Ingresa últimos 4 digitos del número de serie</h3>
                     <input id="serieDXSab" type="text" required>
                     <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Calcular</button>
                 </div>
@@ -53,19 +35,19 @@
 <style>
     :root {
         font-family: sans-serif;
-        --main-bg: linear-gradient(135deg, #FFA500, #FF6347);
+        --main-bg: linear-gradient(135deg, #0079ad, #045483);
         /* Degradado de fondo en tonos de naranja */
         --main-bg-opacity: rgba(255, 255, 255, 0.8);
         --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         --orange-bg: rgba(255, 165, 0, 0.5);
         /* Fondo en tono naranja */
-        --button-bg: linear-gradient(135deg, #FF6347, #FF4500);
+        --button-bg: linear-gradient(135deg, #004e7a, #002f4b);
         /* Degradado de fondo para el botón en tonos de naranja */
         --button-text-color: #FFF;
         /* Texto en blanco */
         --button-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
         /* Sombra para dar efecto de presión */
-        --button-hover-bg: linear-gradient(135deg, #FF4500, #FF6347);
+        --button-hover-bg: linear-gradient(135deg, #002f4b, #004e7a);
         /* Cambio de color en hover */
 
         /* Mismas variables pero en azul para Sabadell */
