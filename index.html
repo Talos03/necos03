@@ -16,13 +16,27 @@
         <div class="mainContainer">
             <div class="contenedor">
                 <div class="selector">
+                    <button type="button" id="Q6000" onclick="showQ6000()">Q6000 <img src="./images/CGP2.png"
+                            alt=""></button>
+                    <button type="button" id="DX8000" onclick="showDX8000()">DX8000 <img src="./images/CGP2.png"
+                            alt=""></button>
                     <button type="button" id="DX8000Sabadell" onclick="showDX8000Sab()">DX8000<img
                             src="./images/bSabadell.svg" alt="BancoSabadell"></button>
                 </div>
+                <div id="Q6000Section">
+                    <h3>Ingresa el número de serie del Q6000</h3>
+                    <input id="serie" type="number" required>
+                    <button id="boton" type="button" onclick="calcularContraseña()">Calcular</button>
+                </div>
+                <div id="DX8000Section" class="noActive">
+                    <h3>Ingresa el número de serie del DX8000</h3>
+                    <input id="serieDX" type="text" required>
+                    <button id="botonDX" type="button" onclick="calcularContraseñaDX()">Calcular</button>
+                </div>
                 <div id="DX8000SabSection" class="noActive">
-                    <h3>Ingresa los cuatro últimos dígitos del SN</h3>
+                    <h3>Ingresa el número de serie del DX8000</h3>
                     <input id="serieDXSab" type="text" required>
-                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Generar</button>
+                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Calcular</button>
                 </div>
                 <div id="contenedorPass"><img src="./images/RANG.gif" class="RICK"></div>
             </div>
