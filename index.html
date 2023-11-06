@@ -10,21 +10,35 @@
 
 <body>
     <header>
-        <h1>Pass generator</h1>
+        <h1>El generador de contraseñas</h1>
     </header>
     <main>
         <div class="mainContainer">
             <div class="contenedor">
                 <div class="selector">
+                    <button type="button" id="Q6000" onclick="showQ6000()">Q6000 <img src="./images/CGP2.png"
+                            alt=""></button>
+                    <button type="button" id="DX8000" onclick="showDX8000()">DX8000 <img src="./images/CGP2.png"
+                            alt=""></button>
                     <button type="button" id="DX8000Sabadell" onclick="showDX8000Sab()">DX8000<img
                             src="./images/bSabadell.svg" alt="BancoSabadell"></button>
                 </div>
-                <div id="DX8000SabSection">
+                <div id="Q6000Section">
+                    <h3>Ingresa el número de serie del Q6000</h3>
+                    <input id="serie" type="number" required>
+                    <button id="boton" type="button" onclick="calcularContraseña()">Calcular</button>
+                </div>
+                <div id="DX8000Section" class="noActive">
+                    <h3>Ingresa el número de serie del DX8000</h3>
+                    <input id="serieDX" type="text" required>
+                    <button id="botonDX" type="button" onclick="calcularContraseñaDX()">Calcular</button>
+                </div>
+                <div id="DX8000SabSection" class="noActive">
                     <h3>Ingresa el número de serie del DX8000</h3>
                     <input id="serieDXSab" type="text" required>
-                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Generar</button>
+                    <button id="botonDXSab" type="button" onclick="calcularContraseñaDXSab()">Calcular</button>
                 </div>
-                <div id="contenedorPass"><
+                <div id="contenedorPass"><img src="./images/RANG.gif" class="RICK"></div>
             </div>
         </div>
     </main>
@@ -32,77 +46,176 @@
         <h4 id="copyright"></h4>
     </footer>
 </body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
 
+</html>
 
 <!-- El estilo de la web -->
 <style>
-   :root {
-    font-family: Arial, sans-serif; /* Cambio de la fuente por una más común */
-}
+    :root {
+        font-family: sans-serif;
+        --main-bg: linear-gradient(135deg, #FFA500, #FF6347);
+        /* Degradado de fondo en tonos de naranja */
+        --main-bg-opacity: rgba(255, 255, 255, 0.8);
+        --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        --orange-bg: rgba(255, 165, 0, 0.5);
+        /* Fondo en tono naranja */
+        --button-bg: linear-gradient(135deg, #FF6347, #FF4500);
+        /* Degradado de fondo para el botón en tonos de naranja */
+        --button-text-color: #FFF;
+        /* Texto en blanco */
+        --button-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        /* Sombra para dar efecto de presión */
+        --button-hover-bg: linear-gradient(135deg, #FF4500, #FF6347);
+        /* Cambio de color en hover */
 
-body {
-    background: #002366; /* Cambio a un tono azul oscuro característico */
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    color: #FFF; /* Texto en blanco para destacar en el fondo oscuro */
-}
+        /* Mismas variables pero en azul para Sabadell */
 
-/* Cambios en los encabezados para un contraste apropiado */
-h1, h3, h4 {
-    text-align: center;
-    color: #002366;
-}
-
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 1rem;
-    background-color: #E6E6E6; /* Fondo gris claro para el contenido */
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Se ajustan los estilos para el contenedor principal */
-.mainContainer, .selector, .contenedor {
-    background-color: #FFF; /* Fondos blancos para los contenedores */
-}
-
-/* Estilos para los botones y campos de entrada */
-input, button {
-    background: #002366; /* Fondo azul oscuro */
-    color: #FFF; /* Texto en blanco */
-    border: none;
-}
-
-button {
-    padding: 1rem 2rem; /* Ajuste en el relleno del botón */
-    border-radius: 0.5rem;
-}
-
-button:hover {
-    background: #003399; /* Cambio de tono al pasar el cursor por encima */
-    transform: scale(1.05);
-}
-
-/* Se conserva el estilo del pie de página */
-footer {
-    display: flex;
-    justify-content: center;
-    font-size: small;
-    margin-top: 2rem;
-    background-color: #E6E6E6;
-    width: 100vw;
-    padding: 1rem;
-}
+        --blue-main-bg: linear-gradient(135deg, #0079ad, #045483);
+        /* Degradado de fondo en tonos de azul */
+        --blue-main-bg-opacity: rgba(255, 255, 255, 0.8);
+        /* Nuevo fondo con tono azul */
+        --blue-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        --blue-bg: rgba(0, 121, 173, 0.5);
+        /* Nuevo fondo en tono azul */
+        --blue-button-bg: linear-gradient(135deg, #004e7a, #002f4b);
+        /* Nuevo degradado de fondo en tonos de azul */
+        --blue-button-text-color: #FFF;
+        /* Texto en blanco */
+        --blue-button-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        /* Sombra para dar efecto de presión */
+        --blue-button-hover-bg: linear-gradient(135deg, #002f4b, #004e7a);
+        /* Cambio de color en hover */
 
 
+    }
+
+    body {
+        /* Degradado de fondo en tonos de naranja */
+        background: var(--main-bg);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: var(--main-bg-opacity);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: var(--box-shadow);
+    }
+
+    h3 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    button>img {
+        max-width: 3rem;
+        border-radius: 5px;
+    }
+
+    .selector {
+        display: grid;
+        justify-content: space-between;
+        gap: 0.5rem;
+        grid-auto-flow: column;
+    }
+
+    .noActive {
+        display: none;
+    }
+
+    .contenedor {
+        background-color: var(--orange-bg);
+        /* Fondo en tono naranja */
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+        border-radius: 1rem;
+        /* Botón más grande */
+        box-shadow: var(--box-shadow);
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 2rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 2rem;
+    }
+
+    button {
+        background: var(--button-bg);
+        color: var(--button-text-color);
+        box-shadow: var(--button-shadow);
+        font-size: 1rem;
+        border: none;
+        padding: 1rem 1rem;
+        /* Aumentar el tamaño del botón */
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.1s;
+    }
+
+    button:hover {
+        background: var(--button-hover-bg);
+        /* Cambio de color en hover */
+        transform: scale(1.05);
+        /* Efecto de agrandamiento en hover */
+    }
+
+    hr {
+        color: black;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        font-size: small;
+        margin-top: 2rem;
+        background-color: rgb(242, 242, 242);
+        width: 100vw;
+        padding: 1rem;
+    }
+
+    .RICK {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        border-radius: 99%;
+        width: 6rem;
+    }
 </style>
 
 <!-- El codigo que calcula el password -->
@@ -126,33 +239,115 @@ footer {
             contenedorPass.prepend(h4pass);
             contenedorPass.prepend(h4serie);
             contenedorPass.prepend(hrLn);
+        }
+    }
 
-            
+    /* Probablemente esto se pueda refactorizar pero no tengo muchas ganas */
+    function showQ6000() {
+        document.getElementById('Q6000Section').style.display = 'grid';
+        document.getElementById('Q6000Section').style.gap = '0.5rem';
+        document.getElementById('DX8000Section').style.display = 'none';
+        document.getElementById('DX8000SabSection').style.display = 'none';
+        let contendorResult = document.getElementById('contenedorPass');
+
+        /* Mientras exista un hijo dentro del div borra todo */
+        while (contendorResult.firstChild) {
+            contendorResult.removeChild(contendorResult.firstChild);
+        }
+        document.documentElement.style.setProperty('--main-bg', 'linear-gradient(135deg, #FFA500, #FF6347)');
+        document.documentElement.style.setProperty('--main-bg-opacity', 'rgba(255, 255, 255, 0.8)');
+        document.documentElement.style.setProperty('--box-shadow', '0px 4px 8px rgba(0, 0, 0, 0.2)');
+        document.documentElement.style.setProperty('--orange-bg', 'rgba(255, 165, 0, 0.5)');
+        document.documentElement.style.setProperty('--button-bg', 'linear-gradient(135deg, #FF6347, #FF4500)');
+        document.documentElement.style.setProperty('--button-text-color', '#FFF');
+        document.documentElement.style.setProperty('--button-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)');
+        document.documentElement.style.setProperty('--button-hover-bg', 'linear-gradient(135deg, #FF4500, #FF6347)');
+    }
+
+    function showDX8000() {
+        document.getElementById('DX8000Section').style.display = 'grid';
+        document.getElementById('DX8000Section').style.gap = '0.5rem';
+        document.getElementById('Q6000Section').style.display = 'none';
+        document.getElementById('DX8000SabSection').style.display = 'none';
+        let contendorResult = document.getElementById('contenedorPass');
+
+        /* Mientras exista un hijo dentro del div borra todo */
+        while (contendorResult.firstChild) {
+            contendorResult.removeChild(contendorResult.firstChild);
+        }
+        //Se puede modificar directamente las variables y reemplazarlas
+        document.documentElement.style.setProperty('--main-bg', 'linear-gradient(135deg, #FFA500, #FF6347)');
+        document.documentElement.style.setProperty('--main-bg-opacity', 'rgba(255, 255, 255, 0.8)');
+        document.documentElement.style.setProperty('--box-shadow', '0px 4px 8px rgba(0, 0, 0, 0.2)');
+        document.documentElement.style.setProperty('--orange-bg', 'rgba(255, 165, 0, 0.5)');
+        document.documentElement.style.setProperty('--button-bg', 'linear-gradient(135deg, #FF6347, #FF4500)');
+        document.documentElement.style.setProperty('--button-text-color', '#FFF');
+        document.documentElement.style.setProperty('--button-shadow', '0px 2px 4px rgba(0, 0, 0, 0.2)');
+        document.documentElement.style.setProperty('--button-hover-bg', 'linear-gradient(135deg, #FF4500, #FF6347)');
+    }
+
+    let contadorClics = 0;
+
     function showDX8000Sab() {
+        contadorClics++
         document.getElementById('DX8000SabSection').style.display = 'grid';
         document.getElementById('DX8000SabSection').style.gap = '0.5rem';
         document.getElementById('DX8000Section').style.display = 'none';
         document.getElementById('Q6000Section').style.display = 'none';
-        let contenedorResult = document.getElementById('contenedorPass');
+        let contendorResult = document.getElementById('contenedorPass');
 
-    /* Mientras exista un hijo dentro del div, borra todo */
-         while (contenedorResult.firstChild) {
-        contenedorResult.removeChild(contenedorResult.firstChild);
-    }
-    // Añadir imagen de RICK si se ha hecho clic más de 20 veces
-    let contadorClics = 20; // Establece el contador en 20 para que la imagen aparezca automáticamente
-    if (contadorClics >= 20) {
-        let rang = document.createElement('img');
-        rang.src = './images/RANG.gif';
-        rang.classList.add('RICK');
-        contenedorResult.appendChild(rang);
+        /* Mientras exista un hijo dentro del div borra todo */
+        while (contendorResult.firstChild) {
+            contendorResult.removeChild(contendorResult.firstChild);
+        }
+
+        //Se puede modificar directamente las variables y reemplazarlas
+        document.documentElement.style.setProperty('--main-bg', 'var(--blue-main-bg)');
+        document.documentElement.style.setProperty('--main-bg-opacity', 'var(--blue-main-bg-opacity)');
+        document.documentElement.style.setProperty('--box-shadow', 'var(--blue-box-shadow)');
+        document.documentElement.style.setProperty('--orange-bg', 'var(--blue-bg)');
+        document.documentElement.style.setProperty('--button-bg', 'var(--blue-button-bg)');
+        document.documentElement.style.setProperty('--button-text-color', 'var(--blue-button-text-color)');
+        document.documentElement.style.setProperty('--button-shadow', 'var(--blue-button-shadow)');
+        document.documentElement.style.setProperty('--button-hover-bg', 'var(--blue-button-hover-bg)');
+
+        if (contadorClics >= 20) {
+            let rang = document.createElement('img');
+            rang.src = './images/RANG.gif';
+            rang.classList.add('RICK');
+            contendorResult.appendChild(rang);
+        }
     }
 
-      function calcularContraseñaDXSab() {
-        /* 8 digit password: 03ab21xy 
-        where, -abcd = 4 last n/s digits, 
-        in case there are any letter then replace them by 0
-        -xy = (b+(c*d)), pad left side with 0 to get 2 digits if necessary */
+
+    function calcularContraseñaDX() {
+        let serial = document.getElementById('serieDX').value;
+        if (serial !== '') {
+            let contraseña;
+            let contenedorPass = document.getElementById('contenedorPass');
+            let h4serie = document.createElement('h4');
+            let h4pass = document.createElement('h4');
+            let hrLn = document.createElement('hr');
+            /* Tomar los antepenultimos dos digitos y darlos vuelta */
+            let antesDeUltimos2 = serial.slice(-4, -2).split('').reverse().join('');
+            /* Tomo los dos primeros, separo, los doy vuelta y los vuelvo a unir */
+            let iniciales2 = serial.slice(0, 2).split('').reverse().join('');
+            /* Tomo los ultimos dos digitos y los separo, doy vuelta y vuelvo a unir */
+            let finales2 = serial.slice(-2).split('').reverse().join('');
+            /* Uno todo en la contraseña final */
+
+            contraseña = antesDeUltimos2 + iniciales2 + finales2;
+
+            h4serie.textContent = `Serie: ${serial}`;
+            h4pass.textContent = `Contraseña: ${contraseña}`;
+            //Prepend hace que siempre se agregue arriba de todo
+            contenedorPass.prepend(h4pass);
+            contenedorPass.prepend(h4serie);
+            contenedorPass.prepend(hrLn);
+        }
+    }
+
+    function calcularContraseñaDXSab() {
         let serial = document.getElementById('serieDXSab').value;
         if (serial !== '') {
             let contraseña = [0, 3, 'a', 'b', 2, 1, 'x', 'y'];
@@ -166,12 +361,9 @@ footer {
             contraseña[2] = ultimos4[0];
             contraseña[3] = ultimos4[1];
 
-        let xy = ultimos4[1] + (ultimos4[2] * ultimos4[3]);
-           if (xy < 10) {
-                xy = '0' + xy; // Agregar un 0 delante si xy es menor que 10
-            }
-            xy = xy.toString().slice(-2); // Tomar solo los dos últimos dígitos (en caso de que sea mayor a 99)
-
+            //ParseINT porque si no lo transformo en entero, suma 4 + 0 y devuelve 40 jejeje
+            let xy = parseInt(ultimos4[1]) + (parseInt(ultimos4[2]) * parseInt(ultimos4[3]));
+            xy = xy.toString().padStart(2, '0'); // Agrega un 0 al principio si xy es un solo dígito
             contraseña[6] = xy[0];
             contraseña[7] = xy[1];
 
@@ -181,14 +373,7 @@ footer {
             contenedorPass.prepend(h4pass);
             contenedorPass.prepend(h4serie);
             contenedorPass.prepend(hrLn);
-
-        // Añadir imagen de RICK si se ha hecho clic más de 20 veces
-        let contadorClics = 20; // Establece el contador en 20 para que la imagen aparezca automáticamente
-        if (contadorClics >= 20) {
-        let rang = document.createElement('img');
-        rang.src = './images/RANG.gif';
-        rang.classList.add('RICK');
-        contenedorResult.appendChild(rang);
+        }
     }
-
-            
+    //Muestra de forma predeterminada el Q6000
+    showQ6000();
